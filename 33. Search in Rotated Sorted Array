@@ -1,0 +1,29 @@
+class Solution {
+public:
+    
+    int search_(vector<int>& nums, int target, int s, int e)
+    {
+        if(s>e)
+            return -1;
+        int mid = (s+e)/2;
+        if(nums[mid] == target)
+            return mid;
+    
+        if(nums[s] <= nums[mid])
+        {
+            if(target <= nums[mid] && target >= nums[s])
+                 return search_(nums,target,s,mid-1);
+            else
+                return search_(nums,target,mid+1,e);
+        }
+        else{
+            if(target >= nums[mid] && target <= nums[e])
+                return search_(nums,target,mid+1,e);
+            return search_(nums,target,s,mid-1);
+        }  
+    }
+    int search(vector<int>& nums, int target) {
+    int s = 0,e = nums.size()-1;
+    return search_(nums,target,s,e);
+    }
+};
