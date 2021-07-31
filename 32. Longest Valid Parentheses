@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int longestValidParentheses(string str) {
+        //the idea is we are storing '(' and its index indicating that this is the point we have encountered the problem and when ')' comes in if we found opening in stack then pop it and calculate the length otherwise we will store its index also
+       
+        
+        stack<char> ch;
+        stack<int> index;
+        //to calculate length this is needed
+        index.push(-1);
+        int maxi = 0; // to handle empty str edge case and "))))" case
+        for(int i=0;i<str.length();i++)
+        {
+            if(str[i] == '(')
+            {
+                ch.push('(');
+                index.push(i);
+            }
+            else
+            {
+                if(!ch.empty() && ch.top() == '(')
+                {
+                    ch.pop();
+                    index.pop();
+                    maxi = max(maxi,i-index.top());
+                }
+                else
+                index.push(i);
+            }
+            
+        }
+        return maxi;
+    }
+};
