@@ -1,0 +1,30 @@
+class Solution {
+public:
+    Node* connect(Node* root) {
+        queue<Node*> nodes;
+        if(root == NULL)
+            return root;
+        
+        nodes.push(root);
+        nodes.push(NULL);
+        while(!nodes.empty())
+        {
+            Node* front = nodes.front();
+            nodes.pop();
+            if(front == NULL)
+            {
+                if(!nodes.empty())
+                    nodes.push(NULL);
+            }
+            else
+            {
+                if(front->left)
+                    nodes.push(front->left);
+                if(front->right)
+                    nodes.push(front->right);
+                front->next = nodes.front();
+            }
+        }
+        return root;
+    }
+};
