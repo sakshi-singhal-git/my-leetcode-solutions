@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class minimaxi{
+    public:
+    int min;
+    int max;
+    bool isBST;
+};
+class Solution {
+public:
+    
+    minimaxi check(TreeNode* root)
+    {
+        if(!root)
+        {
+            minimaxi m;
+            m.min = INT_MAX;
+            m.max = INT_MIN;
+            m.isBST = true;
+            return m;
+        }
+        if(!root->left and !root->right)
+        {
+            minimaxi m;
+            m.min = root->val;
+            m.max = root->val;
+            m.isBST = true;
+            return m;
+        }
+        minimaxi l = check(root->left);
+        minimaxi r = check(root->right);
+        minimaxi ans;
+        ans.min = min(root->val,min(l.min,r.min));
+        ans.max = max(root->val,max(l.max,r.max)); 
+        if(root->val == INT_MAX && root->right == NULL && root->val > l.max)
+            ans.isBST = true;
+        else if(root->val == INT_MIN && root->left == NULL && root->val < r.min)
+            ans.isBST = true;
+        else if(root->val > l.max && root->val < r.min && l.isBST && r.isBST)
+        {
+            ans.isBST = true;
+        }
+        else
+        {
+            ans.isBST = false;
+        }
+        return ans;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        minimaxi ans = check(root);
+        return ans.isBST;
+    }
+};
