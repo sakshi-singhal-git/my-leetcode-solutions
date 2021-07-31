@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int numDecodings(string s) {
+        vector<int> v(s.length()+1,-1);
+        return numDecode(s,0,v);
+    }
+    
+    int numDecode(string s, int index, vector<int>& v)
+    {
+        if(index == s.length())
+            return 1;
+        if(s[index] == '0')
+            return 0;
+        if(index == s.length()-1)
+            return 1;
+        if(v[index] != -1) return v[index];
+        int way1 = numDecode(s,index+1,v);
+        int way2 = 0;
+        if(stoi(s.substr(index,2))<=26)
+           way2 = numDecode(s,index+2,v);
+           
+        v[index] = way1 + way2;
+        return v[index];
+    }
+};
