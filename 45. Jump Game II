@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        
+        if(nums.size() == 0) return 0;
+        vector<int> jumps(nums.size(),INT_MAX);
+        jumps[0] = 0;
+        for(int i=1;i<nums.size();i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(jumps[j] != INT_MAX && nums[j]+j>=i)
+                    jumps[i] = min(jumps[i],jumps[j]+1);
+            }
+        }
+        
+        return jumps[nums.size()-1];
+    }
+};
