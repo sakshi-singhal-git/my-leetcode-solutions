@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& tree) {
+        if(tree.size() == 0 || tree.size() == 1)
+            return tree.size();
+        
+        unordered_map<int,int> mp;
+        int i=0,j=0,maxlength = -1;
+        
+        while(j<tree.size())
+        {
+            mp[tree[j]] = j;
+            if(mp.size() > 2)
+            {
+                int mini = tree.size();
+                for(auto k:mp)
+                {
+                    mini = min(mini,k.second);
+                }
+                 int key = tree[mini];
+                mp.erase(key);
+                i = mini+1;
+
+            }
+            maxlength = max(maxlength,j-i+1);
+            j++;
+        }
+        return maxlength;
+    }
+};
