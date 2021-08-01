@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void getV(TreeNode* root,vector<int> &v)
+    {
+        if(!root)   return;
+        
+        else{
+            getV(root->left,v);
+            v.push_back(root->val);
+            getV(root->right,v);
+        }
+    }
+    
+    int kthSmallest(TreeNode* root, int k) {
+        vector<int> ans;
+        getV(root,ans);
+        return ans[k-1];
+    }
+};
