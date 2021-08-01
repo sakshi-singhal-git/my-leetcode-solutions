@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int numUniqueEmails(vector<string>& emails) {
+        set<string>s;
+
+        for(string email:emails)
+        {
+            string address = "";
+            for(int j=0;j<email.size();j++)
+            {
+                if(email[j] == '.')
+                    continue;
+                else if(email[j] == '+')
+                {
+                    while(email[j] != '@')
+                        j++;
+                    address+=email.substr(j);
+                    break;
+                }
+                //if string does not contain any '+' then from domain name also our '.' will be removed if we do not include this condition.
+                if(email[j] == '@')
+                {
+                    address+=email.substr(j);
+                    break;
+                }
+                    
+                address+=email[j];
+            }
+            s.insert(address);
+        }
+        return s.size();
+                
+      
+    }
+};
