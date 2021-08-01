@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int P) {
+        sort(tokens.begin(),tokens.end());
+        
+        int maxScore = 0, score = 0, i=0, n = tokens.size();
+        while(i<n)
+        {
+            if(tokens[i] <= P)
+            {
+                score++;
+                maxScore = max(maxScore,score);
+                P-=tokens[i];
+                i++;
+            }
+            else if(score)
+            {
+                P+=tokens[n-1];
+                n--;
+                score--;
+            } 
+            //if P is smaller than first value
+            else
+                break;
+        }
+        return maxScore;
+    }
+};
