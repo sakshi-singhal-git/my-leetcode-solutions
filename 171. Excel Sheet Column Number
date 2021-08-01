@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int titleToNumber(string columnTitle) {
+        //we can use map also to store 
+        //A->1
+        //B->2 and so on but this will take O(26) which is constant but still 
+        //to get A->1 we can do A which is 65 so A-65+1 = 1 and so on
+        double ans = 0;
+        int p = 0;
+        for(int i=columnTitle.size()-1;i>=0;i--)
+        {
+            double c = columnTitle[i] - 64;
+            ans+=c*pow(26,p);
+            p++;
+        }
+        return int(ans);
+        
+    }
+};
