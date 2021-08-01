@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+       deque<int> dequeue;
+        for(int iterate =0;iterate<nums.size();iterate++)
+            dequeue.push_back(nums[iterate]);
+        
+        for(int times=0;times<k;times++)
+        {    
+            int last = dequeue.back();
+            dequeue.pop_back();
+            dequeue.push_front(last);
+        } 
+        nums.clear();
+        while(!dequeue.empty())
+        {
+            nums.push_back(dequeue.front());
+            dequeue.pop_front();
+        }    
+    }
+};
