@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+        //TC: O(s.length()+ generating substr takes O(10)) 
+        //SC: O(s.length() - 10 approx)  
+        
+        unordered_map<string,int> mp;
+        vector<string> ans;
+        int i=0;
+        
+        //generate all 10 length string and maintain its count
+        while(i+9 < s.length())
+        {
+            string sub = s.substr(i,10);
+            i++;
+            mp[sub]++;
+            if(mp[sub] == 2)
+                ans.push_back(sub);
+        }
+        return ans;
+    }
+};
