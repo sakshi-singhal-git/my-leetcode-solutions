@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int getnewsum(int n)
+    {
+        int sum =0;
+        while(n)
+        {
+            sum+=(n%10)*(n%10);
+            n /=10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        set<int> s;
+        s.insert(n);
+        while(n != 1)
+        {
+            n = getnewsum(n);
+            //cout<<n<<endl;
+            if(s.find(n)!=s.end())
+                return false;
+            if(n == 1)
+                return true;  
+            s.insert(n);
+        }
+        return true;
+    }
+};
