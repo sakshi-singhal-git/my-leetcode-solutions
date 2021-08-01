@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int divisible(int num, int den)
+    {
+        while(num % den == 0)
+        {
+            num = num / den;
+        }
+        return num;
+    }
+    bool isUgly(int n) {
+        int rem;
+        if(n == 0) return false;
+        rem = divisible(n,5);
+        rem = divisible(rem,3);
+        rem = divisible(rem,2);
+        if(rem == 1)
+            return true;
+        return false;
+    }
+};
