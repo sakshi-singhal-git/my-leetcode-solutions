@@ -1,0 +1,25 @@
+class Solution {
+public:
+
+    int numRescueBoats(vector<int>& people, int limit) {        
+        
+        //we can at max take 2 people at a time if we can then that is the minimum number of the boats we need. So we will try to match the heavyist people with the lighter one because that is the only case it can happen in an efficient way
+        if(people.size() <2)
+            return people.size();
+        sort(people.begin(),people.end());
+        int i=0,j= people.size()-1,boats = 0;
+        
+        while(i<j)
+        {
+            if(people[i]+people[j] <= limit)
+            {
+                i++;
+            }
+            j--;
+            boats++;
+            
+        }
+        if(i == j) boats++;
+        return boats;
+    }
+};
