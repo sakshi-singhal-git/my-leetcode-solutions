@@ -1,0 +1,35 @@
+class Solution {
+	int rows;
+	int cols;
+
+	void markIsland(vector<vector<char>>& grid, int x, int y) {
+		if (x < 0 || x >= rows || y < 0 || y >= cols || grid[x][y] != '1')
+			return;
+
+		grid[x][y] = '2';
+		markIsland(grid, x - 1, y);
+		markIsland(grid, x, y - 1);
+		markIsland(grid, x + 1, y);
+		markIsland(grid, x, y + 1);
+
+	}
+public:
+	int numIslands(vector<vector<char>>& grid) {
+		int islands = 0;
+		rows = grid.size();
+
+		if (rows != 0) {
+			cols = grid[0].size();
+			for (int x = 0; x < rows; x++) {
+				for (int y = 0; y < cols; y++) {
+					if (grid[x][y] == '1')
+					{
+						islands++;
+						markIsland(grid, x, y);
+					}
+				}
+			}
+		}
+		return islands;
+	}
+};
