@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int aczor = x^y , count = 0;
+        
+        while(aczor)
+        {
+            count += aczor & 1;
+            aczor >>= 1;
+        }
+        return count;
+    }
+};
