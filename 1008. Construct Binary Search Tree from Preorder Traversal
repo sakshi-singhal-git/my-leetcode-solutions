@@ -1,0 +1,23 @@
+class Solution {
+public:
+    
+    TreeNode* getTree(vector<int>& in, int ins, int ine, vector<int>& pre, int pres, int pree)
+    {
+        if(ins>ine || pres> pree)
+            return NULL;
+        TreeNode* tree = new TreeNode(pre[pres]);
+        int k=ins;
+        for(;in[k] != pre[pres];k++);
+        
+        tree->left = getTree(in, ins, k-1, pre, pres+1, pres+ k-ins);
+        tree->right = getTree(in, k+1, ine, pre, pres+k-ins+1, pree);
+        return tree;
+    }
+    
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        vector<int>pre= preorder;
+        sort(preorder.begin(),preorder.end());
+        
+        return getTree(preorder, 0, preorder.size()-1, pre, 0 , preorder.size()-1);
+    }
+};
