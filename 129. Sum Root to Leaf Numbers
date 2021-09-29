@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int summation(TreeNode* root, int sum)
+    {
+        if(!root) return 0;
+        
+        sum = sum*10+root->val;
+        if(!root->left && !root->right) return sum;
+        
+        return summation(root->left,sum) + summation(root->right, sum);
+    }
+    int sumNumbers(TreeNode* root) {
+        return summation(root,0);
+    }
+};
